@@ -1,0 +1,14 @@
+.step-container {
+  transition: opacity 0.5s ease-in-out, background-color 0.5s ease-in-out;
+  opacity: 1;
+}
+
+.inactive-step {
+  opacity: 0.5;
+  background-color: #f0f0f0;
+}
+
+.active-step {
+  opacity: 1;
+  background-color: #fff;
+}

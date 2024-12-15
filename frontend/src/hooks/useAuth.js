@@ -1,0 +1,31 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const useAuth = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const backend_domain = process.env.REACT_APP_BACKEND_DOMAIN;
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await axios.get(`http://${backend_domain}/auth/check_auth/`, {
+          withCredentials: true,
+        });
+        if (response.status === 200) {
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        setIsAuthenticated(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+  return { isAuthenticated, loading };
+};
+
+export default useAuth;
